@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17T00:00:00.000Z",
+  "title": "Design System: JobTracker",
+  "extensions": {
+    "colorMeta": {
+      "primary-deep-amethyst": { "role": "primary", "displayName": "Deep Amethyst", "canonical": "oklch(72% 0.22 295)", "tonalRamp": ["#1e1b2e", "#3d355c", "#5c4d8a", "#7b65b8", "#9a7de6", "#a78bfa", "#c5b0fc", "#e2d8fe"] },
+      "primary-clear-azure": { "role": "primary", "displayName": "Clear Azure", "canonical": "oklch(68% 0.2 240)", "tonalRamp": ["#17233e", "#2a4078", "#3d5eb2", "#507cec", "#60a5fa", "#8cc0fc", "#b8dbfd", "#dbeaff"] },
+      "primary-seafoam": { "role": "primary", "displayName": "Seafoam", "canonical": "oklch(75% 0.15 165)", "tonalRamp": ["#102d29", "#1d564d", "#2a7f6f", "#2dd4bf", "#5ce8d6", "#8cf0e3", "#b8f7ef", "#e0fbfa"] },
+      "accent-purple": { "role": "semantic", "displayName": "Signal Violet", "canonical": "oklch(72% 0.22 295)", "tonalRamp": ["#1e1b2e", "#3d355c", "#5c4d8a", "#7b65b8", "#9a7de6", "#a78bfa", "#c5b0fc", "#e2d8fe"] },
+      "accent-blue": { "role": "semantic", "displayName": "Applied Blue", "canonical": "oklch(68% 0.2 240)", "tonalRamp": ["#17233e", "#2a4078", "#3d5eb2", "#507cec", "#60a5fa", "#8cc0fc", "#b8dbfd", "#dbeaff"] },
+      "accent-green": { "role": "semantic", "displayName": "Success Green", "canonical": "oklch(71% 0.19 145)", "tonalRamp": ["#142d1b", "#285a36", "#3c8751", "#22c55e", "#4ade80", "#86efac", "#bbf7d0", "#dcfce7"] },
+      "accent-orange": { "role": "semantic", "displayName": "Amber Glow", "canonical": "oklch(70% 0.18 55)", "tonalRamp": ["#3d2100", "#7a4200", "#b75d00", "#f59e0b", "#fb923c", "#fdba74", "#fed7aa", "#ffedd5"] },
+      "accent-red": { "role": "semantic", "displayName": "Alert Red", "canonical": "oklch(65% 0.22 25)", "tonalRamp": ["#3e1111", "#7a1a1a", "#b91c1c", "#ef4444", "#f87171", "#fca5a5", "#fecaca", "#fee2e2"] },
+      "accent-teal": { "role": "semantic", "displayName": "Seafoam", "canonical": "oklch(75% 0.15 165)", "tonalRamp": ["#102d29", "#1d564d", "#2a7f6f", "#2dd4bf", "#5ce8d6", "#8cf0e3", "#b8f7ef", "#e0fbfa"] },
+      "bg-primary": { "role": "neutral", "displayName": "Void", "canonical": "oklch(8% 0.02 260)", "tonalRamp": ["#000000", "#0a0a0f", "#12121a", "#1a1a2e", "#24243e", "#303050", "#3e3e66", "#4e4e80"] },
+      "bg-secondary": { "role": "neutral", "displayName": "Charcoal Deep", "canonical": "oklch(10% 0.02 260)", "tonalRamp": ["#050508", "#0f0f14", "#12121a", "#1f1f2d", "#2f2f42", "#3f3f5a", "#525276", "#686896"] },
+      "bg-tertiary": { "role": "neutral", "displayName": "Charcoal", "canonical": "oklch(15% 0.03 265)", "tonalRamp": ["#0a0a10", "#14141e", "#1a1a2e", "#25253f", "#323252", "#404068", "#505082", "#6262a0"] },
+      "text-primary": { "role": "neutral", "displayName": "Text Brilliant", "canonical": "oklch(96% 0.005 240)", "tonalRamp": ["#1e2028", "#3a3f4e", "#5a6178", "#7c83a0", "#9ea6c8", "#c0cbef", "#dfe4f7", "#f1f5f9"] },
+      "text-secondary": { "role": "neutral", "displayName": "Text Muted", "canonical": "oklch(60% 0.02 240)", "tonalRamp": ["#1e2028", "#3a3f4e", "#5a6178", "#7c83a0", "#9ea6c8", "#c0cbef", "#dfe4f7", "#f1f5f9"] },
+      "text-tertiary": { "role": "neutral", "displayName": "Text Dim", "canonical": "oklch(45% 0.02 240)", "tonalRamp": ["#1e2028", "#3a3f4e", "#5a6178", "#7c83a0", "#9ea6c8", "#c0cbef", "#dfe4f7", "#f1f5f9"] },
+      "text-muted": { "role": "neutral", "displayName": "Text Whisper", "canonical": "oklch(35% 0.02 240)", "tonalRamp": ["#1e2028", "#3a3f4e", "#5a6178", "#7c83a0", "#9ea6c8", "#c0cbef", "#dfe4f7", "#f1f5f9"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Page titles only — gradient text-fill via background-clip:text" },
+      "headline": { "displayName": "Headline", "purpose": "Card section titles (Recent Applications, Pipeline)" },
+      "title": { "displayName": "Title", "purpose": "Company names, document titles, modal headers" },
+      "body": { "displayName": "Body", "purpose": "Default prose — descriptions, answers, notes, form help" },
+      "label": { "displayName": "Label", "purpose": "Table headers, form labels, filter tabs, status badge text — uppercase tracked" },
+      "mono": { "displayName": "Mono", "purpose": "Application IDs, timestamps, code snippets, technical metadata" }
+    },
+    "shadows": [
+      { "name": "glow", "value": "0 0 20px rgba(167, 139, 250, 0.15)", "purpose": "Primary interaction shadow — card hover, primary button hover, stat card hover, focus rings (3px spread)" },
+      { "name": "ambient-low", "value": "0 1px 3px rgba(0, 0, 0, 0.3)", "purpose": "Loading spinner only" },
+      { "name": "ambient-medium", "value": "0 4px 12px rgba(0, 0, 0, 0.4)", "purpose": "Reserved — unused in current implementation" },
+      { "name": "ambient-high", "value": "0 8px 30px rgba(0, 0, 0, 0.5)", "purpose": "Reserved — unused in current implementation" }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Default easing for state transitions (hover, focus, active)" },
+      { "name": "ease-out", "value": "cubic-bezier(0, 0, 0.2, 1)", "purpose": "Fade-in, slide-up animations" },
+      { "name": "ease-spring", "value": "cubic-bezier(0.34, 1.56, 0.64, 1)", "purpose": "Scale-in, bounce effects" },
+      { "name": "duration-fast", "value": "150ms", "purpose": "Button press, color transitions" },
+      { "name": "duration-standard", "value": "200ms", "purpose": "Hover/focus transitions, card lift" },
+      { "name": "duration-slow", "value": "500ms", "purpose": "Pipeline bar width transition" }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px", "purpose": "Sidebar collapses to drawer, mobile menu appears" },
+      { "name": "xl", "value": "1280px" },
+      { "name": "2xl", "value": "1400px", "purpose": "Main content max-width" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "btn-primary",
+      "description": "Primary action — gradient background, glow hover, single per screen",
+      "html": "<button class=\"ds-btn-primary\">Add Application</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 20px; border-radius: 10px; font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); border: none; text-decoration: none; white-space: nowrap; background: linear-gradient(135deg, #a78bfa, #818cf8); color: white; box-shadow: 0 2px 10px rgba(167, 139, 250, 0.3); } .ds-btn-primary:hover { box-shadow: 0 4px 20px rgba(167, 139, 250, 0.5), 0 0 20px rgba(167, 139, 250, 0.15); transform: translateY(-1px); color: white; } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15), 0 4px 20px rgba(167, 139, 250, 0.5); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "btn-secondary",
+      "description": "Secondary action — glass background, border, subtle hover",
+      "html": "<button class=\"ds-btn-secondary\">Cancel</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 20px; border-radius: 10px; font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(255, 255, 255, 0.1); text-decoration: none; white-space: nowrap; background: rgba(255, 255, 255, 0.06); color: #f1f5f9; } .ds-btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: #a78bfa; } .ds-btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "btn-ghost",
+      "description": "Tertiary/nav action — transparent, text-only, hover reveals glass",
+      "html": "<button class=\"ds-btn-ghost\">View All</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 20px; border-radius: 10px; font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); border: none; text-decoration: none; white-space: nowrap; background: transparent; color: #94a3b8; } .ds-btn-ghost:hover { background: rgba(255, 255, 255, 0.06); color: #f1f5f9; } .ds-btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15); }"
+    },
+    {
+      "name": "Danger Button",
+      "kind": "button",
+      "refersTo": "btn-danger",
+      "description": "Destructive action — red dim background, red text, subtle border",
+      "html": "<button class=\"ds-btn-danger\">Delete</button>",
+      "css": ".ds-btn-danger { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 20px; border-radius: 10px; font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(248, 113, 113, 0.2); text-decoration: none; white-space: nowrap; background: rgba(248, 113, 113, 0.15); color: #f87171; } .ds-btn-danger:hover { background: rgba(248, 113, 113, 0.25); } .ds-btn-danger:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.15); }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Primary content container — glassmorphism, blur, hover glow lift",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Card Title</h3><p class=\"ds-card-body\">Card content goes here. Glassmorphism surface with backdrop blur.</p></div>",
+      "css": ".ds-card { background: rgba(26, 26, 46, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 14px; padding: 24px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); } .ds-card:hover { border-color: rgba(255, 255, 255, 0.1); box-shadow: 0 0 20px rgba(167, 139, 250, 0.15); transform: translateY(-2px); } .ds-card-title { font-size: 1.25rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; } .ds-card-body { font-size: 0.95rem; color: #f1f5f9; line-height: 1.6; }"
+    },
+    {
+      "name": "Stat Card",
+      "kind": "card",
+      "refersTo": "stat-card",
+      "description": "Dashboard metric — top accent bar reveals on hover, stagger fade-in",
+      "html": "<div class=\"ds-stat-card\" style=\"--stat-color: linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #2dd4bf 100%)\"><div class=\"ds-stat-icon\" style=\"background: rgba(167, 139, 250, 0.15)\">📊</div><div class=\"ds-stat-value\">42</div><div class=\"ds-stat-label\">Total</div></div>",
+      "css": ".ds-stat-card { background: rgba(26, 26, 46, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 14px; padding: 24px; position: relative; overflow: hidden; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); animation: fadeInUp 0.4s cubic-bezier(0, 0, 0.2, 1) both; } .ds-stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--stat-color, linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #2dd4bf 100%)); opacity: 0; transition: opacity 0.3s ease; } .ds-stat-card:hover::before { opacity: 1; } .ds-stat-card:hover { transform: translateY(-3px); box-shadow: 0 0 20px rgba(167, 139, 250, 0.15); border-color: rgba(255, 255, 255, 0.1); } .ds-stat-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; } .ds-stat-value { font-size: 2rem; font-weight: 800; line-height: 1; margin-bottom: 4px; } .ds-stat-label { font-size: 0.85rem; color: #94a3b8; font-weight: 500; } @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "refersTo": "status-badge",
+      "description": "Semantic status pill — vivid text on dim background with emoji icon",
+      "html": "<span class=\"ds-status-badge\" style=\"color: #60a5fa; background: rgba(96, 165, 250, 0.15)\">📨 Applied</span>",
+      "css": ".ds-status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; }"
+    },
+    {
+      "name": "Form Input",
+      "kind": "input",
+      "refersTo": "form-input",
+      "description": "Text input — glass background, accent focus glow, 3px spread ring",
+      "html": "<input type=\"text\" class=\"ds-form-input\" placeholder=\"Enter company name\" />",
+      "css": ".ds-form-input { width: 100%; padding: 10px 14px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px; color: #f1f5f9; font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.9rem; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); outline: none; } .ds-form-input::placeholder { color: #475569; } .ds-form-input:focus { border-color: #a78bfa; box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15); }"
+    },
+    {
+      "name": "Sidebar Link",
+      "kind": "nav",
+      "refersTo": "sidebar-link",
+      "description": "Navigation item — icon + label, active state uses purple dim background",
+      "html": "<a href=\"/\" class=\"ds-sidebar-link active\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/></svg><span>Dashboard</span></a>",
+      "css": ".ds-sidebar-link { display: flex; align-items: center; gap: 16px; padding: 8px 16px; border-radius: 10px; color: #94a3b8; font-size: 0.9rem; font-weight: 500; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); text-decoration: none; white-space: nowrap; } .ds-sidebar-link:hover { background: rgba(255, 255, 255, 0.06); color: #f1f5f9; } .ds-sidebar-link.active { background: rgba(167, 139, 250, 0.15); color: #a78bfa; } .ds-sidebar-link svg { flex-shrink: 0; width: 20px; height: 20px; }"
+    },
+    {
+      "name": "Filter Tab",
+      "kind": "chip",
+      "refersTo": "filter-tab",
+      "description": "Filter control — pill shape, active uses purple dim background",
+      "html": "<button class=\"ds-filter-tab active\">All</button>",
+      "css": ".ds-filter-tab { padding: 8px 16px; border-radius: 10px; font-size: 0.82rem; font-weight: 600; color: #94a3b8; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); border: none; background: transparent; font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; white-space: nowrap; } .ds-filter-tab:hover { color: #f1f5f9; background: rgba(255, 255, 255, 0.06); } .ds-filter-tab.active { background: rgba(167, 139, 250, 0.15); color: #a78bfa; }"
+    },
+    {
+      "name": "Data Table",
+      "kind": "custom",
+      "refersTo": "table",
+      "description": "Applications table — dense, hover reveal, horizontal scroll on mobile",
+      "html": "<div class=\"ds-table-container\"><table class=\"ds-table\"><thead><tr><th>Company</th><th>Position</th><th>Source</th><th>Status</th><th>Date</th></tr></thead><tbody><tr><td><a href=\"#\" class=\"ds-table-link\">Acme Corp</a></td><td style=\"color: #94a3b8\">Software Engineer</td><td><span style=\"font-size: 0.82rem\">💼 LinkedIn</span></td><td><span class=\"ds-status-badge\" style=\"color: #60a5fa; background: rgba(96, 165, 250, 0.15)\">📨 Applied</span></td><td style=\"color: #64748b; font-size: 0.85rem\"><span style=\"display: flex; align-items: center; gap: 4px\"><svg width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"12 6 12 12 16 14\"/></svg>2 days ago</span></td></tr></tbody></table></div>",
+      "css": ".ds-table-container { overflow-x: auto; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.06); } .ds-table { width: 100%; border-collapse: collapse; } .ds-table th { text-align: left; padding: 16px; font-size: 0.8rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(255, 255, 255, 0.03); border-bottom: 1px solid rgba(255, 255, 255, 0.06); } .ds-table td { padding: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); font-size: 0.9rem; } .ds-table tr:last-child td { border-bottom: none; } .ds-table tr:hover td { background: rgba(255, 255, 255, 0.06); } .ds-table-link { color: #f1f5f9; font-weight: 500; transition: color 0.2s ease; } .ds-table-link:hover { color: #a78bfa; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Signal Panel",
+    "overview": "A dark, glassmorphism command center for job search intelligence. The visual language prioritizes scanability and signal clarity over decoration — every accent color carries semantic meaning (pipeline stage, source channel, status health), and the primary gradient flows like a data visualization. Glassmorphism surfaces at rest create depth through translucency and blur; interaction adds a purposeful glow shadow that confirms state change. The layout is dense but breathable, built for a single user who checks this dashboard daily and needs to absorb pipeline health in seconds.",
+    "keyCharacteristics": [
+      "Dark-first, glassmorphism depth — backgrounds layer from near-black (#0a0a0f) through translucent cards with 20px backdrop blur",
+      "Gradient as data signature — the purple→azure→seafoam gradient appears on the page title, primary buttons, and stat card top bars; it *is* the brand",
+      "Semantic color vocabulary — 7 status colors + 6 source icons, each with a dedicated dim variant for badges/chips; never decorative",
+      "Hybrid elevation — glass at rest (subtle border, blur), shadow glow on hover/focus/active — depth responds to user intent",
+      "Inter font, technical precision — 800-weight display headlines with gradient fill, 600-weight labels with tracking, consistent 16px base rhythm",
+      "Micro-animations as feedback — stagger fade-in on load, 0.2s transitions on all interactive elements, scale-down on press"
+    ],
+    "rules": [
+      { "name": "The Gradient Signature Rule", "body": "The primary gradient (Deep Amethyst → Clear Azure → Seafoam) appears in exactly four contexts: page title text-fill, primary button background, stat card top accent bar, and focus ring shadow. It is never used as a text color on body copy, never as a border, never as a background wash. Its rarity is the signal.", "section": "colors" },
+      { "name": "The Dim Pairing Rule", "body": "Every semantic accent *must* have a `dim` variant at 15% opacity for its badge/chip background. The vivid variant is for text, icons, and indicators only. No accent stands alone without its dim counterpart.", "section": "colors" },
+      { "name": "The Terminal State Rule", "body": "Only two statuses use green/red without a pipeline continuation: OFFERED (Success Green) and REJECTED (Alert Red). All other statuses flow forward. This visual finality is intentional.", "section": "colors" },
+      { "name": "The Gradient Headline Rule", "body": "Only the page-level `h1` (`.page-title`) receives gradient text-fill. No other heading, label, or button text uses gradient fill — even if it's a primary action. The gradient is a page anchor, not a text style.", "section": "typography" },
+      { "name": "The Label Tracking Rule", "body": "All uppercase/semi-capitalized labels (table headers, form labels, filter tabs) use `letter-spacing: 0.05em` and `font-weight: 600` at `0.8rem`. This creates the technical \"dashboard\" scan rhythm. Never apply to body copy.", "section": "typography" },
+      { "name": "The Mono Containment Rule", "body": "JetBrains Mono appears only inside `<code>`, `<pre>`, `.font-mono` utility, or explicit technical metadata. It never leaks into UI labels or buttons.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest — no box-shadow, no elevation. Depth is conveyed through background opacity (layering), backdrop blur (material), and hairline borders (edges). Shadows appear *only* as a response to state: hover, focus, active.", "section": "elevation" },
+      { "name": "The Colored Glow Rule", "body": "The single interaction shadow (`--shadow-glow`) uses the primary accent hue (Deep Amethyst at 15% opacity). Black shadows do not exist in the interaction vocabulary. The glow *is* the brand responding.", "section": "elevation" },
+      { "name": "The No-Elevation-Scale Rule", "body": "There is no `shadow-sm`/`md`/`lg` progression for component elevation. Cards don't \"float higher\" on hover — they glow and lift 2-3px. The system has two states: rest and engaged.", "section": "elevation" },
+      { "name": "The Container Radius Rule", "body": "All content containers (cards, stat cards, answer cards, interview cards, doc cards) use `--radius-lg` (14px). Buttons and inputs use `--radius-md` (10px). The 4px step between them creates a visible hierarchy: containers are softer; actions are sharper.", "section": "shapes" },
+      { "name": "The Pill Identity Rule", "body": "Status badges, filter chips, and icon containers use `--radius-full`. This distinguishes *labels/tags* from *containers/actions* at a glance. Never apply `full` to a button or card.", "section": "shapes" },
+      { "name": "The Hairline Only Rule", "body": "Borders are always 1px. No 2px emphasis borders, no inset borders for focus — focus uses the 3px accent glow spread (`0 0 0 3px var(--accent-purple-dim)`) instead.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do use the primary gradient (Deep Amethyst → Clear Azure → Seafoam) only on: page titles (text-fill), primary buttons, stat card top bars, focus ring spreads. Nowhere else.",
+      "Do pair every semantic accent with its `dim` variant (15% opacity) for badge/chip backgrounds. The vivid color is for text/icons/indicators only.",
+      "Do keep surfaces flat at rest (glassmorphism + hairline border). Add the colored Glow shadow (`0 0 20px rgba(167,139,250,0.15)`) only on hover/focus/active.",
+      "Do use `--radius-lg` (14px) for all content containers, `--radius-md` (10px) for actions/inputs, `--radius-full` for status pills. This 4px step is the shape hierarchy.",
+      "Do use Inter 800 with gradient text-fill for page titles only. Inter 600 uppercase tracked for labels. Inter 400 for body. JetBrains Mono only for code/technical IDs.",
+      "Do stagger fade-in (0.05s increments) on dashboard stat cards and lists. It creates the \"panel loading\" feel.",
+      "Do use emoji icons for status badges (📋 📨 🎯 📞 📧 🎉 ❌ 🔙) and source chips (💼 🔍 ✉️ 🌐 🐓 📌). They're universal, lightweight, and fit the personal-tool tone.",
+      "Do let tables horizontally scroll on mobile. The data is dense by design.",
+      "Do use the 16px base spacing scale (4/8/16/24/32/48/64) for all margins, padding, gaps. No arbitrary pixel values."
+    ],
+    "donts": [
+      "Don't use the primary gradient as a text color on body copy, card headers, or button labels. It's a page-anchor signature, not a text style.",
+      "Don't use a semantic vivid color (Amethyst, Azure, Seafoam, Amber, Green, Red) as a background wash without its `dim` variant. The 15% opacity is the contract.",
+      "Don't add ambient box-shadows to resting cards, buttons, or inputs. The system is flat at rest; depth responds to intent.",
+      "Don't use black/gray shadows for interaction. The only interaction shadow is the colored Glow (Deep Amethyst at 15%).",
+      "Don't create new radius values. The 5-step scale (6/10/14/20/9999) covers every component. No `8px`, `12px`, `16px` one-offs.",
+      "Don't use borders thicker than 1px. Focus uses a 3px *spread* (glow), not a border.",
+      "Don't replace emoji icons with Lucide/Iconify in status badges or source chips. The emoji set is the established visual language.",
+      "Don't add a second display font. Inter carries the system through weight, gradient-fill, and tracking — not pairing.",
+      "Don't add pagination, sorting, or virtualization to the applications table. The personal dataset stays small; scanning beats paging.",
+      "Don't invent new spacing values. If 24px feels wrong, use 16px or 32px — the scale is the system."
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Application {
+  id                   String   @id @default(cuid())
+  companyName          String
+  jobTitle             String
+  jobUrl               String?
+  jobDescription       String?
+  companyBackground    String?
+  applicationSource    String   @default("OTHER")
+  status               String   @default("SAVED")
+  applicationDate      DateTime?
+  responseDate         DateTime?
+  salary               String?
+  location             String?
+  workMode             String   @default("ONSITE")
+  notes                String?
+  requiredTechnologies String   @default("")
+  contactPerson        String?
+  contactEmail         String?
+  contactPhone         String?
+  documentsAttached    String   @default("")
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  generatedAnswers   GeneratedAnswer[]
+  interviewQuestions InterviewQuestion[]
+}
+
+model GeneratedAnswer {
+  id            String   @id @default(cuid())
+  applicationId String
+  question      String
+  answer        String
+  createdAt     DateTime @default(now())
+
+  application Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}
+
+model InterviewQuestion {
+  id            String   @id @default(cuid())
+  applicationId String
+  question      String
+  suggestedAnswer String?
+  category      String   @default("TECHNICAL")
+  difficulty    String   @default("MEDIUM")
+  isPracticed   Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  application Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}

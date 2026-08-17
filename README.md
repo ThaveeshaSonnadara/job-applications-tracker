@@ -1,34 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Job Applications Tracker (by Thaveesha Sonnadara)
 
-## Getting Started
+A full-stack job application tracker with AI-assisted form answering, tailored interview preparation, and document management. Built for tracking Associate Software Engineer, Software Engineer, and Internship applications in Sri Lanka and globally.
 
-First, run the development server:
+---
 
+## ✨ Features
+
+- 📊 **Interactive Dashboard:** Real-time application metrics, conversion funnel visualization, and recent activities.
+- 🎯 **AI Form Answer Generator:** Generates personalized, natural, and human-sounding answers to application form questions using your full profile, degree background, MarketPushApps internship experience, and projects. Individual and batch copy buttons.
+- 🧠 **Tailored Interview Prep:** Generates categorized interview questions (Technical, Behavioral, Company-Specific) with suggested talking points as you. Track your practice progress per company.
+- 📁 **Document Manager:** Previews and one-click downloads for your CV, Westminster Degree Transcript, MarketPushApps Internship Letter, Birth Certificate, and GCE A/L & O/L Results.
+- 📈 **Analytics & Insights:** Status distribution, channel success metrics (LinkedIn, TopJobs, Direct Email, Rooster.Jobs), and most in-demand skills in your target roles.
+- 🛡️ **Zero Cloud DB Setup:** Powered by local SQLite + Prisma ORM. Fast, lightweight, and private on your machine.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Database:** SQLite with Prisma ORM
+- **AI Engine:** OpenRouter API (supports free models such as DeepSeek R1, Llama 3.1, Gemma 2)
+- **Styling:** Custom Dark-Themed CSS Design System with Glassmorphism, Micro-Animations & Google Fonts Inter
+- **Icons:** Lucide React
+
+---
+
+## 🚀 Getting Started
+
+### 1. Configure OpenRouter API Key
+Open `.env.local` inside `app/` and add your free OpenRouter API key:
+```env
+OPENROUTER_API_KEY=your_actual_openrouter_api_key_here
+AI_MODEL=deepseek/deepseek-r1-0528:free
+```
+*(Get a free key from [openrouter.ai](https://openrouter.ai) with Google Login — no credit card required)*
+
+### 2. Run Database Migrations
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx prisma db push
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Start Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-## Learn More
+## 📝 Document Guidelines for Sri Lankan Applications
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Document | When to Submit |
+| :--- | :--- |
+| **CV - Thaveesha Sonnadara [SE].pdf** | Always attach to every application |
+| **Degree Transcript Screenshot.png** | When asked for university transcript / proof of degree |
+| **Internship Confirmation Letter.pdf** | When asked for proof of experience / service letter |
+| **Birth Certificate Original.pdf** | When required for HR onboarding / ID verification |
+| **GCE A/L & O/L Results Schedules** | **Only when explicitly requested** by the employer |
