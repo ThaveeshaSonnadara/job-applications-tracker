@@ -2,7 +2,7 @@
 
 A polished, dark-themed full-stack job application tracker with AI-assisted form answering, tailored interview preparation, and document management. Built for tracking Software Engineer, Associate SE, and Internship applications across Sri Lanka and globally.
 
-> **Live Demo:** [https://job-applications-tracker.vercel.app](https://job-applications-tracker.vercel.app) _(deploy your own below)_
+> **Live Demo:** [https://job-applications-tracker-gules.vercel.app](https://job-applications-tracker-gules.vercel.app) _(deploy your own below)_
 
 ---
 
@@ -19,26 +19,23 @@ A polished, dark-themed full-stack job application tracker with AI-assisted form
 
 ---
 
-## 📸 Dashboard Preview
+## 📸 Screenshots
 
 ### Main Dashboard
 
-> ![Dashboard Overview Preview](docs/dashboard-overview.png)
+![Dashboard Overview](docs/dashboard-overview.png)
 
-### Alaytics Page Overview
+### Applications Management
 
-> ![Analytics Overview Preview](docs/analytics-page.png)
+![Applications Page](docs/applications-page.png)
 
-- Paste any form question → Get personalized answer as _you_
-- Uses your full profile: degree, internship, projects, skills
-- Individual & batch copy buttons
+### Add New Application (with AI URL Extraction)
 
-### Interview Prep
+![Add New Application Page](docs/add-new-application-page.png)
 
-- Technical / Behavioral / Company-Specific categories
-- Difficulty filtering (Easy/Medium/Hard)
-- Practice tracking with progress bar
-- Expandable suggested talking points
+### Analytics & Insights
+
+![Analytics Page](docs/analytics-page.png)
 
 ---
 
@@ -73,7 +70,7 @@ A polished, dark-themed full-stack job application tracker with AI-assisted form
 
 ### 3. One-Click Deploy
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/job-applications-tracker)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ThaveeshaSonnadara/job-applications-tracker)
 
 Or manually:
 
@@ -90,8 +87,8 @@ Or manually:
 ### 4. Local Development
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/job-applications-tracker.git
-cd job-applications-tracker/app
+git clone https://github.com/ThaveeshaSonnadara/job-applications-tracker.git
+cd job-applications-tracker
 
 # .env.local - use Neon DEV branch Direct connection
 DATABASE_URL="postgresql://... (dev branch Direct)"
@@ -114,7 +111,7 @@ app/
 ├── prisma/
 │   ├── schema.prisma          # Data models
 │   ├── migrations/            # SQL migrations
-│   └── config.ts              # Prisma 7+ config
+│   └── config.js              # Prisma 7+ config
 ├── src/
 │   ├── app/
 │   │   ├── page.tsx           # Dashboard
