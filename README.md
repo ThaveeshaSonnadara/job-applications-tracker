@@ -1,60 +1,175 @@
-# 🚀 Job Applications Tracker (by Thaveesha Sonnadara)
+# 🚀 Job Applications Tracker
 
-A full-stack job application tracker with AI-assisted form answering, tailored interview preparation, and document management. Built for tracking Associate Software Engineer, Software Engineer, and Internship applications in Sri Lanka and globally.
+A polished, dark-themed full-stack job application tracker with AI-assisted form answering, tailored interview preparation, and document management. Built for tracking Software Engineer, Associate SE, and Internship applications across Sri Lanka and globally.
+
+> **Live Demo:** [https://job-applications-tracker.vercel.app](https://job-applications-tracker.vercel.app) *(deploy your own below)*
 
 ---
 
-## ✨ Features
+## ✨ Features at a Glance
 
-- 📊 **Interactive Dashboard:** Real-time application metrics, conversion funnel visualization, and recent activities.
-- 🎯 **AI Form Answer Generator:** Generates personalized, natural, and human-sounding answers to application form questions using your full profile, degree background, MarketPushApps internship experience, and projects. Individual and batch copy buttons.
-- 🧠 **Tailored Interview Prep:** Generates categorized interview questions (Technical, Behavioral, Company-Specific) with suggested talking points as you. Track your practice progress per company.
-- 📁 **Document Manager:** Previews and one-click downloads for your CV, Westminster Degree Transcript, MarketPushApps Internship Letter, Birth Certificate, and GCE A/L & O/L Results.
-- 📈 **Analytics & Insights:** Status distribution, channel success metrics (LinkedIn, TopJobs, Direct Email, Rooster.Jobs), and most in-demand skills in your target roles.
-- 🛡️ **Zero Cloud DB Setup:** Powered by local SQLite + Prisma ORM. Fast, lightweight, and private on your machine.
+| Feature | Description |
+|---------|-------------|
+| 📊 **Interactive Dashboard** | Real-time metrics, conversion funnel, pipeline bar, recent activity feed |
+| 🎯 **AI Form Answer Generator** | Personalized, human-sounding answers using your full profile, degree, internship & projects |
+| 🧠 **Tailored Interview Prep** | Categorized questions (Technical, Behavioral, Company-Specific) with talking points & practice tracking |
+| 📁 **Document Manager** | Previews & one-click downloads for CV, transcripts, certificates, results |
+| 📈 **Analytics & Insights** | Status distribution, channel success metrics, in-demand skills radar |
+| ☁️ **Cloud-Native PostgreSQL** | Neon serverless DB — zero local setup, works on Vercel instantly |
+
+---
+
+## 📸 Dashboard Preview
+
+### Main Dashboard
+> *Add screenshot: `docs/dashboard-overview.png`*
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  Applications                    🎯 Generate  + Add Application     │
+├─────────────────────────────────────────────────────────────────────┤
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │
+│  │  Total  │ │ Applied │ │Interview│ │ Offered │ │ Rejected│       │
+│  │   47    │ │   23    │ │    8    │ │    3    │ │    5    │       │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘       │
+├─────────────────────────────────────────────────────────────────────┤
+│  Pipeline: ████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░  49%              │
+├─────────────────────────────────────────────────────────────────────┤
+│  Company A          Senior SE        Applied      2025-01-15  📨    │
+│  Company B          Associate SE     Interview    2025-01-10  🎯    │
+│  Company C          Intern           Offered     2025-01-05  🎉    │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### AI Answer Generator
+> *Add screenshot: `docs/ai-answers.png`*
+- Paste any form question → Get personalized answer as *you*
+- Uses your full profile: degree, internship, projects, skills
+- Individual & batch copy buttons
+
+### Interview Prep
+> *Add screenshot: `docs/interview-prep.png`*
+- Technical / Behavioral / Company-Specific categories
+- Difficulty filtering (Easy/Medium/Hard)
+- Practice tracking with progress bar
+- Expandable suggested talking points
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Next.js 15 (App Router)
-- **Language:** TypeScript
-- **Database:** SQLite with Prisma ORM
-- **AI Engine:** OpenRouter API (supports free models such as DeepSeek R1, Llama 3.1, Gemma 2)
-- **Styling:** Custom Dark-Themed CSS Design System with Glassmorphism, Micro-Animations & Google Fonts Inter
-- **Icons:** Lucide React
+| Layer | Technology |
+|-------|------------|
+| **Framework** | Next.js 15 (App Router, Turbopack) |
+| **Language** | TypeScript 5 |
+| **Database** | PostgreSQL (Neon serverless) + Prisma ORM |
+| **AI** | OpenRouter API (DeepSeek, Llama, Nemotron, Gemma) |
+| **Styling** | Custom CSS Design System — Glassmorphism, Gradient accents, Dark theme |
+| **Icons** | Lucide React |
+| **Deployment** | Vercel (zero-config) |
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Deploy Your Own (2 minutes)
 
-### 1. Configure OpenRouter API Key
-Open `.env.local` inside `app/` and add your free OpenRouter API key:
-```env
-OPENROUTER_API_KEY=your_actual_openrouter_api_key_here
-AI_MODEL=deepseek/deepseek-r1-0528:free
-```
-*(Get a free key from [openrouter.ai](https://openrouter.ai) with Google Login — no credit card required)*
+### 1. Prerequisites
+- **GitHub account** — [github.com](https://github.com)
+- **Neon account** (free) — [console.neon.tech](https://console.neon.tech)
+- **OpenRouter API key** (free) — [openrouter.ai](https://openrouter.ai)
+- **Vercel account** — [vercel.com](https://vercel.com)
 
-### 2. Run Database Migrations
+### 2. Neon Database (30 sec)
+1. Create project → name it `job-tracker`
+2. **Main branch** → Copy **Pooled connection** → save for Vercel
+3. **Dev branch** → Create branch `dev` → Copy **Direct connection** → save for local
+
+### 3. One-Click Deploy
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/job-applications-tracker)
+
+Or manually:
+1. Fork this repo → `github.com/YOUR_USERNAME/job-applications-tracker`
+2. **Vercel** → "Add New Project" → Import fork
+3. **Environment Variables:**
+   ```env
+   DATABASE_URL=postgresql://...pooler... (Neon MAIN branch Pooled)
+   OPENROUTER_API_KEY=sk-or-v1-...
+   AI_MODEL=nvidia/nemotron-3-ultra-550b-a55b:free
+   ```
+4. Deploy → Runs migration automatically
+
+### 4. Local Development
 ```bash
-npx prisma db push
-```
+git clone https://github.com/YOUR_USERNAME/job-applications-tracker.git
+cd job-applications-tracker/app
 
-### 3. Start Development Server
-```bash
+# .env.local - use Neon DEV branch Direct connection
+DATABASE_URL="postgresql://... (dev branch Direct)"
+OPENROUTER_API_KEY=sk-or-v1-...
+AI_MODEL=nvidia/nemotron-3-ultra-550b-a55b:free
+
+npm install
+npx prisma migrate dev --name init
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 📝 Document Guidelines for Sri Lankan Applications
+## 📁 Project Structure
+
+```
+app/
+├── prisma/
+│   ├── schema.prisma          # Data models
+│   ├── migrations/            # SQL migrations
+│   └── config.ts              # Prisma 7+ config
+├── src/
+│   ├── app/
+│   │   ├── page.tsx           # Dashboard
+│   │   ├── analytics/page.tsx # Analytics & insights
+│   │   ├── applications/      # CRUD + AI features
+│   │   ├── documents/page.tsx # Document manager
+│   │   └── api/               # AI endpoints (extract, answer, interview)
+│   ├── components/
+│   │   └── Sidebar.tsx        # Navigation
+│   ├── lib/
+│   │   ├── db.ts              # Prisma client (lazy proxy)
+│   │   ├── ai.ts              # OpenRouter + extraction
+│   │   └── utils.ts           # Helpers
+│   └── globals.css            # Design system tokens
+├── DESIGN.md                  # Full design specification
+└── PRODUCT.md                 # Product context
+```
+
+---
+
+## 📝 Document Guidelines (Sri Lankan Applications)
 
 | Document | When to Submit |
-| :--- | :--- |
-| **CV - Thaveesha Sonnadara [SE].pdf** | Always attach to every application |
-| **Degree Transcript Screenshot.png** | When asked for university transcript / proof of degree |
-| **Internship Confirmation Letter.pdf** | When asked for proof of experience / service letter |
-| **Birth Certificate Original.pdf** | When required for HR onboarding / ID verification |
-| **GCE A/L & O/L Results Schedules** | **Only when explicitly requested** by the employer |
+|----------|----------------|
+| **CV - Thaveesha Sonnadara [SE].pdf** | Always attach |
+| **Degree Transcript Screenshot.png** | Proof of degree requested |
+| **Internship Confirmation Letter.pdf** | Proof of experience requested |
+| **Birth Certificate Original.pdf** | HR onboarding / ID verification |
+| **GCE A/L & O/L Results** | Only when explicitly requested |
+
+---
+
+## 🎨 Design System Highlights
+
+- **Gradient Signature:** Deep Amethyst → Clear Azure → Seafoam (page titles, primary buttons, stat cards)
+- **Glassmorphism:** Translucent cards with 20px backdrop blur at rest; colored glow on interaction
+- **Semantic Colors:** 7 status colors with paired dim variants (15% opacity) for badges
+- **Typography:** Inter (800 display w/ gradient fill, 600 labels w/ tracking, 400 body) + JetBrains Mono
+- **Motion:** Stagger fade-in, transform-based transitions, no layout thrash
+
+See [DESIGN.md](DESIGN.md) for full specification.
+
+---
+
+## 📄 License
+
+MIT — feel free to use, modify, and deploy for your own job search.
+
+---
+
+**Built with care by [Thaveesha Sonnadara](https://github.com/ThaveeshaSonnadara)** — tracking applications so you don't have to.
