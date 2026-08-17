@@ -88,7 +88,7 @@ Or manually:
 
 ```bash
 git clone https://github.com/ThaveeshaSonnadara/job-applications-tracker.git
-cd job-applications-tracker/app
+cd job-applications-tracker
 
 # .env.local - use Neon DEV branch Direct connection
 DATABASE_URL="postgresql://... (dev branch Direct)"
