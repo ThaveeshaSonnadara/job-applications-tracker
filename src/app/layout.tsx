@@ -5,6 +5,11 @@ import Sidebar from '@/components/Sidebar';
 export const metadata: Metadata = {
   title: 'JobTracker — Thaveesha\'s Job Application Tracker',
   description: 'AI-powered job application tracker with intelligent form filling, interview preparation, and document management for Software Engineering positions in Sri Lanka.',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
