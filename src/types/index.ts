@@ -67,14 +67,14 @@ export interface InterviewQuestion {
 }
 
 export const STATUS_CONFIG: Record<ApplicationStatus, { label: string; color: string; bgColor: string; icon: string }> = {
-  SAVED: { label: 'Saved', color: '#94a3b8', bgColor: 'rgba(148, 163, 184, 0.15)', icon: '📋' },
-  APPLIED: { label: 'Applied', color: '#60a5fa', bgColor: 'rgba(96, 165, 250, 0.15)', icon: '📨' },
-  INTERVIEW_CALLED: { label: 'Interview Called', color: '#a78bfa', bgColor: 'rgba(167, 139, 250, 0.15)', icon: '🎯' },
-  PHONE_CALL: { label: 'Phone Call', color: '#fb923c', bgColor: 'rgba(251, 146, 60, 0.15)', icon: '📞' },
-  EMAIL_RESPONSE: { label: 'Email Response', color: '#2dd4bf', bgColor: 'rgba(45, 212, 191, 0.15)', icon: '📧' },
-  OFFERED: { label: 'Offered', color: '#4ade80', bgColor: 'rgba(74, 222, 128, 0.15)', icon: '🎉' },
-  REJECTED: { label: 'Rejected', color: '#f87171', bgColor: 'rgba(248, 113, 113, 0.15)', icon: '❌' },
-  WITHDRAWN: { label: 'Withdrawn', color: '#64748b', bgColor: 'rgba(100, 116, 139, 0.15)', icon: '🔙' },
+  SAVED: { label: 'Saved', color: '#475569', bgColor: '#F1F5F9', icon: '📋' },
+  APPLIED: { label: 'Applied', color: '#0069A4', bgColor: '#EAF1F8', icon: '📨' },
+  INTERVIEW_CALLED: { label: 'Interview Called', color: '#1281C3', bgColor: '#D8EBFB', icon: '🎯' },
+  PHONE_CALL: { label: 'Phone Call', color: '#D97706', bgColor: '#FEF3C7', icon: '📞' },
+  EMAIL_RESPONSE: { label: 'Email Response', color: '#0D9488', bgColor: '#CCFBF1', icon: '📧' },
+  OFFERED: { label: 'Offered', color: '#16A34A', bgColor: '#DCFCE7', icon: '🎉' },
+  REJECTED: { label: 'Rejected', color: '#DC2626', bgColor: '#FEE2E2', icon: '❌' },
+  WITHDRAWN: { label: 'Withdrawn', color: '#64748B', bgColor: '#F1F5F9', icon: '🔙' },
 };
 
 export const SOURCE_CONFIG: Record<ApplicationSource, { label: string; icon: string }> = {

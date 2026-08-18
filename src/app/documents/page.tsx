@@ -133,8 +133,8 @@ export default function DocumentManagerPage() {
         className="card"
         style={{
           marginBottom: 'var(--space-xl)',
-          background: 'rgba(167, 139, 250, 0.08)',
-          borderColor: 'var(--accent-purple-dim)',
+          background: 'var(--secondary)',
+          borderColor: 'var(--border-primary)',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-md)' }}>
