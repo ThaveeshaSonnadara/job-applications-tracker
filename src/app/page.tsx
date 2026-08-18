@@ -79,10 +79,10 @@ export default function Dashboard() {
   };
 
   const statCards = [
-    { label: 'Total', value: stats.total, color: 'var(--gradient-primary)', icon: '📊', bgColor: 'var(--accent-purple-dim)' },
-    { label: 'Active', value: stats.active, color: '#60a5fa', icon: '⚡', bgColor: 'rgba(96, 165, 250, 0.15)' },
-    { label: 'Offered', value: stats.offered, color: '#4ade80', icon: '🎉', bgColor: 'rgba(74, 222, 128, 0.15)' },
-    { label: 'Rejected', value: stats.rejected, color: '#f87171', icon: '❌', bgColor: 'rgba(248, 113, 113, 0.15)' },
+    { label: 'Total', value: stats.total, color: '#0069A4', icon: '📊', bgColor: '#D8EBFB' },
+    { label: 'Active', value: stats.active, color: '#1281C3', icon: '⚡', bgColor: '#EAF1F8' },
+    { label: 'Offered', value: stats.offered, color: '#16a34a', icon: '🎉', bgColor: '#DCFCE7' },
+    { label: 'Rejected', value: stats.rejected, color: '#dc2626', icon: '❌', bgColor: '#FEE2E2' },
   ];
 
   const recentApps = applications.slice(0, 8);

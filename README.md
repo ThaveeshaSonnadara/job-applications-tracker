@@ -1,6 +1,6 @@
 # 🚀 Job Applications Tracker
 
-A polished, dark-themed full-stack job application tracker with AI-assisted form answering, tailored interview preparation, and document management. Built for tracking Software Engineer, Associate SE, and Internship applications across Sri Lanka and globally.
+A polished full-stack job application tracker with AI-assisted form answering, tailored interview preparation, and document management. Built for tracking Software Engineer, Associate SE, and Internship applications across Sri Lanka and globally.
 
 > **Live Demo:** [https://job-applications-tracker-gules.vercel.app](https://job-applications-tracker-gules.vercel.app) _(deploy your own below)_
 
@@ -43,11 +43,11 @@ A polished, dark-themed full-stack job application tracker with AI-assisted form
 
 | Layer          | Technology                                                             |
 | -------------- | ---------------------------------------------------------------------- |
-| **Framework**  | Next.js 15 (App Router, Turbopack)                                     |
+| **Framework**  | Next.js 16 (App Router, Turbopack)                                     |
 | **Language**   | TypeScript 5                                                           |
 | **Database**   | PostgreSQL (Neon serverless) + Prisma ORM                              |
 | **AI**         | OpenRouter API (DeepSeek, Llama, Nemotron, Gemma)                      |
-| **Styling**    | Custom CSS Design System — Glassmorphism, Gradient accents, Dark theme |
+| **Styling**    | Custom CSS Design System — Modern light dashboard, DM Sans typography, Blue palette |
 | **Icons**      | Lucide React                                                           |
 | **Deployment** | Vercel (zero-config)                                                   |
 
@@ -145,12 +145,11 @@ app/
 ---
 
 ## 🎨 Design System Highlights
-
-- **Gradient Signature:** Deep Amethyst → Clear Azure → Seafoam (page titles, primary buttons, stat cards)
-- **Glassmorphism:** Translucent cards with 20px backdrop blur at rest; colored glow on interaction
-- **Semantic Colors:** 7 status colors with paired dim variants (15% opacity) for badges
-- **Typography:** Inter (800 display w/ gradient fill, 600 labels w/ tracking, 400 body) + JetBrains Mono
-- **Motion:** Stagger fade-in, transform-based transitions, no layout thrash
+- **Brand Palette:** Deep Blue (`#0069A4`) → Vibrant Azure (`#1281C3`) with soft `#F5FBFF` canvas and `#EAF1F8` secondary surfaces
+- **Data-Forward Dashboard:** Clean white cards with crisp borders and subtle elevations
+- **Semantic Badges:** 8 status states with high-contrast labels and soft pill tints
+- **Typography:** DM Sans (700 headings, 600 labels, 400 body) + JetBrains Mono
+- **Motion:** Micro-interactions, smooth transitions, reduced-motion accessibility support
 
 See [DESIGN.md](DESIGN.md) for full specification.
 
