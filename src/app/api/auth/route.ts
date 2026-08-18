@@ -15,7 +15,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Admin auth not configured' }, { status: 500 });
     }
 
-    if (password !== adminPassword) {
+    const passwordStr = typeof password === 'string' ? password : '';
+    const passwordBuf = Buffer.from(passwordStr);
+    const adminBuf = Buffer.from(adminPassword);
+    const isValid =
+      passwordBuf.length === adminBuf.length && crypto.timingSafeEqual(passwordBuf, adminBuf);
+
+    if (!isValid) {
       return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
     }
 
