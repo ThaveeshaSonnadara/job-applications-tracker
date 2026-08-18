@@ -4,9 +4,10 @@ import { generateInterviewPrep } from '@/lib/ai';
 import { requireAdmin } from '@/lib/admin-auth';
 
 export async function POST(request: NextRequest) {
+  const unauthorized = requireAdmin(request);
+  if (unauthorized) return unauthorized;
+
   try {
-    const unauthorized = requireAdmin(request);
-    if (unauthorized) return unauthorized;
 
     const body = await request.json();
     const { applicationId } = body;

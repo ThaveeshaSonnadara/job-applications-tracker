@@ -12,7 +12,18 @@ export function isAdminRequest(request: NextRequest): boolean {
   }
 
   const token = request.cookies.get('admin_token')?.value;
-  return token === hashAdminToken(adminPassword);
+  if (!token) {
+    return false;
+  }
+
+  const expectedToken = hashAdminToken(adminPassword);
+  const tokenBuf = Buffer.from(token);
+  const expectedBuf = Buffer.from(expectedToken);
+
+  return (
+    tokenBuf.length === expectedBuf.length &&
+    crypto.timingSafeEqual(tokenBuf, expectedBuf)
+  );
 }
 
 export function requireAdmin(request: NextRequest): NextResponse | null {
@@ -20,5 +31,9 @@ export function requireAdmin(request: NextRequest): NextResponse | null {
     return null;
   }
 
-  return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  return NextResponse.json(
+    { error: 'Unauthorized: Admin access required' },
+    { status: 401 }
+  );
 }
+

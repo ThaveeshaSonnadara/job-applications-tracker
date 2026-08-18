@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
-import { requireAdmin } from '@/lib/admin-auth';
+import { isAdminRequest, requireAdmin } from '@/lib/admin-auth';
 
 export async function GET(
   request: NextRequest,
@@ -8,12 +8,16 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
+    const isAdmin = isAdminRequest(request);
+
     const application = await prisma.application.findUnique({
       where: { id },
-      include: {
-        generatedAnswers: { orderBy: { createdAt: 'desc' } },
-        interviewQuestions: { orderBy: { createdAt: 'desc' } },
-      },
+      include: isAdmin
+        ? {
+            generatedAnswers: { orderBy: { createdAt: 'desc' } },
+            interviewQuestions: { orderBy: { createdAt: 'desc' } },
+          }
+        : undefined,
     });
 
     if (!application) {
@@ -31,10 +35,10 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  try {
-    const unauthorized = requireAdmin(request);
-    if (unauthorized) return unauthorized;
+  const unauthorized = requireAdmin(request);
+  if (unauthorized) return unauthorized;
 
+  try {
     const { id } = await params;
     const body = await request.json();
     
@@ -86,10 +90,10 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  try {
-    const unauthorized = requireAdmin(request);
-    if (unauthorized) return unauthorized;
+  const unauthorized = requireAdmin(request);
+  if (unauthorized) return unauthorized;
 
+  try {
     const { id } = await params;
     await prisma.application.delete({ where: { id } });
     return NextResponse.json({ success: true });
@@ -98,3 +102,5 @@ export async function DELETE(
     return NextResponse.json({ error: 'Failed to delete application' }, { status: 500 });
   }
 }
+
+

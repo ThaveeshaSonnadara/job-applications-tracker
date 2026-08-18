@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Save, Briefcase, Loader2, Zap, AlertCircle, CheckCircle } from 'lucide-react';
 import { ALL_SOURCES, ALL_WORK_MODES, SOURCE_CONFIG, ApplicationSource, WorkMode } from '@/types';
+import { useAdmin } from '@/lib/admin';
 
 const DOCUMENTS = [
   { id: 'cv', name: 'CV - Thaveesha Sonnadara [SE].pdf', always: true },
@@ -17,10 +18,17 @@ const DOCUMENTS = [
 
 export default function NewApplicationPage() {
   const router = useRouter();
+  const { isAdmin, loading: authLoading } = useAdmin();
   const [saving, setSaving] = useState(false);
   const [extracting, setExtracting] = useState(false);
   const [extractError, setExtractError] = useState<string | null>(null);
   const [extractSuccess, setExtractSuccess] = useState(false);
+
+  useEffect(() => {
+    if (!authLoading && !isAdmin) {
+      router.push('/applications');
+    }
+  }, [authLoading, isAdmin, router]);
   const [form, setForm] = useState({
     companyName: '',
     jobTitle: '',
@@ -122,6 +130,14 @@ export default function NewApplicationPage() {
       setSaving(false);
     }
   };
+
+  if (authLoading || !isAdmin) {
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
+        <div className="loading-spinner" style={{ width: 40, height: 40 }} />
+      </div>
+    );
+  }
 
   return (
     <div className="animate-fade-in">

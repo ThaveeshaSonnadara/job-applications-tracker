@@ -1,13 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Sparkles, Copy, Check, RefreshCw, Loader2 } from 'lucide-react';
 import { Application, GeneratedAnswer } from '@/types';
+import { useAdmin } from '@/lib/admin';
 
 export default function AIAnswersPage() {
   const params = useParams();
+  const router = useRouter();
+  const { isAdmin, loading: authLoading } = useAdmin();
   const [app, setApp] = useState<Application | null>(null);
   const [answers, setAnswers] = useState<GeneratedAnswer[]>([]);
   const [questions, setQuestions] = useState('');
@@ -17,6 +20,14 @@ export default function AIAnswersPage() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!authLoading && !isAdmin) {
+      router.push(`/applications/${params.id}`);
+    }
+  }, [authLoading, isAdmin, params.id, router]);
+
+  useEffect(() => {
+    if (authLoading || !isAdmin) return;
+
     fetch(`/api/applications/${params.id}`)
       .then(res => res.json())
       .then(data => {
@@ -25,7 +36,7 @@ export default function AIAnswersPage() {
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, [params.id]);
+  }, [params.id, authLoading, isAdmin]);
 
   const handleGenerate = async () => {
     if (!questions.trim() || !app) return;
@@ -78,7 +89,7 @@ export default function AIAnswersPage() {
     copyToClipboard(allText, 'all');
   };
 
-  if (loading) {
+  if (authLoading || !isAdmin || loading) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
         <div className="loading-spinner" style={{ width: 40, height: 40 }} />

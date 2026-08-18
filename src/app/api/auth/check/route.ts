@@ -7,3 +7,4 @@ export async function GET(request: NextRequest) {
     isAdmin: isAdminRequest(request),
   });
 }
+
