@@ -57,9 +57,10 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   const logout = async () => {
     try {
       await fetch('/api/auth', { method: 'DELETE' });
-      setIsAdmin(false);
     } catch {
       // ignore
+    } finally {
+      setIsAdmin(false);
     }
   };
 
