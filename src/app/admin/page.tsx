@@ -119,6 +119,8 @@ export default function AdminLoginPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                aria-pressed={showPassword}
                 style={{
                   position: 'absolute',
                   right: '12px',
@@ -130,7 +132,6 @@ export default function AdminLoginPage() {
                   color: 'var(--text-muted)',
                   padding: '4px',
                 }}
-                tabIndex={-1}
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
