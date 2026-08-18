@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Plus, Briefcase, Clock, RefreshCw, AlertCircle, Keyboard, Zap } from 'lucide-react';
 import { Application, STATUS_CONFIG, ApplicationStatus } from '@/types';
 import { timeAgo } from '@/lib/utils';
+import { useAdmin } from '@/lib/admin';
 
 export default function Dashboard() {
   const [applications, setApplications] = useState<Application[]>([]);
@@ -13,6 +14,7 @@ export default function Dashboard() {
   const [isOnline, setIsOnline] = useState(true);
   const [showShortcuts, setShowShortcuts] = useState(false);
   const retryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const { isAdmin } = useAdmin();
 
   const fetchApplications = useCallback(async () => {
     setLoading(true);
@@ -119,10 +121,12 @@ export default function Dashboard() {
           <h1 className="page-title">Dashboard</h1>
           <p className="page-subtitle">Track your job application journey</p>
         </div>
-        <Link href="/applications/new" className="btn btn-primary">
-          <Plus size={18} />
-          Add Application
-        </Link>
+        {isAdmin && (
+          <Link href="/applications/new" className="btn btn-primary">
+            <Plus size={18} />
+            Add Application
+          </Link>
+        )}
       </div>
 
       {/* Stats Grid */}
@@ -212,11 +216,7 @@ export default function Dashboard() {
               <Briefcase size={48} />
             </div>
             <h3>No applications yet</h3>
-            <p>Add your first application to get started.</p>
-            <Link href="/applications/new" className="btn btn-primary">
-              <Plus size={18} />
-              Add Application
-            </Link>
+            <p>No applications have been tracked yet.</p>
           </div>
         ) : (
           <div className="table-container">

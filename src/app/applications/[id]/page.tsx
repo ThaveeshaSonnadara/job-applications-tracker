@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { Application, STATUS_CONFIG, SOURCE_CONFIG, ALL_STATUSES, ApplicationStatus } from '@/types';
 import { formatDate } from '@/lib/utils';
+import { useAdmin } from '@/lib/admin';
 
 export default function ApplicationDetailPage() {
   const params = useParams();
@@ -16,6 +17,7 @@ export default function ApplicationDetailPage() {
   const [app, setApp] = useState<Application | null>(null);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
+  const { isAdmin } = useAdmin();
 
   const fetchApp = () => {
     fetch(`/api/applications/${params.id}`)
@@ -88,23 +90,25 @@ export default function ApplicationDetailPage() {
             )}
           </p>
         </div>
-        <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
-          <Link href={`/applications/${app.id}/answers`} className="btn btn-primary">
-            <Sparkles size={16} /> AI Answers
-          </Link>
-          <Link href={`/applications/${app.id}/interview`} className="btn btn-secondary">
-            <BookOpen size={16} /> Interview Prep
-          </Link>
-          <button onClick={handleDelete} className="btn btn-danger btn-icon" title="Delete">
-            <Trash2 size={16} />
-          </button>
-        </div>
+        {isAdmin && (
+          <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
+            <Link href={`/applications/${app.id}/answers`} className="btn btn-primary">
+              <Sparkles size={16} /> AI Answers
+            </Link>
+            <Link href={`/applications/${app.id}/interview`} className="btn btn-secondary">
+              <BookOpen size={16} /> Interview Prep
+            </Link>
+            <button onClick={handleDelete} className="btn btn-danger btn-icon" title="Delete">
+              <Trash2 size={16} />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Status Actions */}
       <div className="card" style={{ marginBottom: 'var(--space-lg)' }}>
         <h3 style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 'var(--space-md)' }}>
-          Update Status
+          {isAdmin ? 'Update Status' : 'Application Status'}
         </h3>
         <div className="status-actions">
           {ALL_STATUSES.map(status => {
@@ -114,14 +118,15 @@ export default function ApplicationDetailPage() {
               <button
                 key={status}
                 className="status-btn"
-                onClick={() => updateStatus(status)}
-                disabled={updating || isActive}
+                onClick={() => isAdmin ? updateStatus(status) : undefined}
+                disabled={!isAdmin || updating || isActive}
                 style={{
                   color: config.color,
                   background: isActive ? config.bgColor : 'transparent',
                   borderColor: isActive ? config.color : 'var(--border-primary)',
                   opacity: isActive ? 1 : 0.7,
                   fontWeight: isActive ? 700 : 500,
+                  cursor: !isAdmin ? 'default' : undefined,
                 }}
               >
                 {config.icon} {config.label}
@@ -164,8 +169,8 @@ export default function ApplicationDetailPage() {
             </div>
           )}
 
-          {/* Generated Answers Preview */}
-          {app.generatedAnswers && app.generatedAnswers.length > 0 && (
+          {/* Generated Answers Preview — Admin Only */}
+          {isAdmin && app.generatedAnswers && app.generatedAnswers.length > 0 && (
             <div className="card" style={{ marginBottom: 'var(--space-lg)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-md)' }}>
                 <div className="detail-section-title" style={{ margin: 0 }}>
