@@ -23,8 +23,8 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   const checkAdmin = async () => {
     try {
       const res = await fetch('/api/auth/check');
-      const data = await res.json();
-      setIsAdmin(data.isAdmin);
+      const data = res.ok ? await res.json() : null;
+      setIsAdmin(Boolean(data?.isAdmin));
     } catch {
       setIsAdmin(false);
     } finally {
