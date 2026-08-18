@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
-
-function hashToken(password: string): string {
-  return crypto.createHash('sha256').update(password).digest('hex');
-}
+import { hashAdminToken } from '@/lib/admin-auth';
 
 // POST /api/auth — Login
 export async function POST(request: NextRequest) {
@@ -25,7 +22,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
     }
 
-    const token = hashToken(adminPassword);
+    const token = hashAdminToken(adminPassword);
     const response = NextResponse.json({ success: true });
 
     response.cookies.set('admin_token', token, {

@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { extractJobFromUrl } from '@/lib/ai';
+import { requireAdmin } from '@/lib/admin-auth';
 
 export async function POST(request: NextRequest) {
   try {
+    const unauthorized = requireAdmin(request);
+    if (unauthorized) return unauthorized;
+
     const body = await request.json();
     const { url } = body;
 
