@@ -1,6 +1,6 @@
 # 🚀 Job Applications Tracker
 
-A polished full-stack job application tracker with AI-assisted form answering, tailored interview preparation, and document management. Built for tracking Software Engineer, Associate SE, and Internship applications across Sri Lanka and globally.
+A polished full-stack job application tracker with AI-assisted form answering, tailored interview preparation, document management, and secure admin/public dual-mode view. Built for tracking Software Engineer, Associate SE, and Internship applications across Sri Lanka and globally.
 
 > **Live Demo:** [https://job-applications-tracker-gules.vercel.app](https://job-applications-tracker-gules.vercel.app) _(deploy your own below)_
 
@@ -8,14 +8,33 @@ A polished full-stack job application tracker with AI-assisted form answering, t
 
 ## ✨ Features at a Glance
 
-| Feature                         | Description                                                                                             |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| 📊 **Interactive Dashboard**    | Real-time metrics, conversion funnel, pipeline bar, recent activity feed                                |
-| 🎯 **AI Form Answer Generator** | Personalized, human-sounding answers using your full profile, degree, internship & projects             |
-| 🧠 **Tailored Interview Prep**  | Categorized questions (Technical, Behavioral, Company-Specific) with talking points & practice tracking |
-| 📁 **Document Manager**         | Previews & one-click downloads for CV, transcripts, certificates, results                               |
-| 📈 **Analytics & Insights**     | Status distribution, channel success metrics, in-demand skills radar                                    |
-| ☁️ **Cloud-Native PostgreSQL**  | Neon serverless DB — zero local setup, works on Vercel instantly                                        |
+| Feature                                   | Description                                                                                             |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| 📊 **Interactive Dashboard**              | Real-time metrics, conversion funnel, pipeline bar, recent activity feed                                |
+| 🔒 **Admin & Public Portfolio Mode**      | Public visitors see a clean read-only showcase; admin logs in via `/admin` to unlock all privileged actions |
+| 🎯 **AI Form Answer Generator** (Admin)   | Personalized, human-sounding answers using your full profile, degree, internship & projects             |
+| 🧠 **Tailored Interview Prep** (Admin)    | Categorized questions (Technical, Behavioral, Company-Specific) with talking points & practice tracking |
+| ⚡ **AI Job URL Extraction** (Admin)      | Extract company name, role, requirements, and job description directly from job posting URLs            |
+| 📁 **Document Manager**                   | Previews & one-click downloads for CV, transcripts, certificates, results                               |
+| 📈 **Analytics & Insights**               | Status distribution, channel success metrics, in-demand skills radar                                    |
+| 🛡️ **Server-Side Security & Redaction**  | Timing-safe auth tokens, API endpoint protection, and server-side redaction of confidential AI data      |
+| ☁️ **Cloud-Native PostgreSQL**            | Neon serverless DB — zero local setup, works on Vercel instantly                                        |
+
+---
+
+## 🔒 Public Portfolio vs. Admin Mode
+
+The application is designed to be shared publicly as an interactive career tracker and portfolio while keeping private application details secure:
+
+- **Public Visitors (Default):**
+  - View overall application statistics, analytics, and document downloads.
+  - Browse applications with non-editable status indicators.
+  - Confidential AI answers, interview preparation, delete buttons, and creation forms are completely hidden and redacted from API responses.
+- **Admin Mode (Unlocked via `/admin`):**
+  - Add, update, and delete applications.
+  - Auto-extract job details from application URLs using AI.
+  - Generate personalized form answers and custom interview preparation talking points.
+  - Fast status transitions with automatic timestamping.
 
 ---
 
@@ -46,6 +65,7 @@ A polished full-stack job application tracker with AI-assisted form answering, t
 | **Framework**  | Next.js 16 (App Router, Turbopack)                                     |
 | **Language**   | TypeScript 5                                                           |
 | **Database**   | PostgreSQL (Neon serverless) + Prisma ORM                              |
+| **Security**   | Secure HTTP-only cookies, timing-safe crypto comparison, server-side data redaction |
 | **AI**         | OpenRouter API (DeepSeek, Llama, Nemotron, Gemma)                      |
 | **Styling**    | Custom CSS Design System — Modern light dashboard, DM Sans typography, Blue palette |
 | **Icons**      | Lucide React                                                           |
@@ -81,6 +101,7 @@ Or manually:
    DATABASE_URL=postgresql://...pooler... (Neon MAIN branch Pooled)
    OPENROUTER_API_KEY=sk-or-v1-...
    AI_MODEL=nvidia/nemotron-3-ultra-550b-a55b:free
+   ADMIN_PASSWORD=your-secure-admin-password
    ```
 4. Deploy → Runs migration automatically
 
@@ -88,19 +109,20 @@ Or manually:
 
 ```bash
 git clone https://github.com/ThaveeshaSonnadara/job-applications-tracker.git
-cd job-applications-tracker
+cd job-applications-tracker/app
 
 # .env.local - use Neon DEV branch Direct connection
 DATABASE_URL="postgresql://... (dev branch Direct)"
 OPENROUTER_API_KEY=sk-or-v1-...
 AI_MODEL=nvidia/nemotron-3-ultra-550b-a55b:free
+ADMIN_PASSWORD="your-local-admin-password"
 
 npm install
 npx prisma migrate dev --name init
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3000](http://localhost:3000) and visit [http://localhost:3000/admin](http://localhost:3000/admin) to log in as admin.
 
 ---
 
@@ -111,21 +133,34 @@ app/
 ├── prisma/
 │   ├── schema.prisma          # Data models
 │   ├── migrations/            # SQL migrations
-│   └── config.js              # Prisma 7+ config
+│   └── config.js              # Prisma config
 ├── src/
 │   ├── app/
-│   │   ├── page.tsx           # Dashboard
-│   │   ├── analytics/page.tsx # Analytics & insights
-│   │   ├── applications/      # CRUD + AI features
-│   │   ├── documents/page.tsx # Document manager
-│   │   └── api/               # AI endpoints (extract, answer, interview)
+│   │   ├── page.tsx           # Dashboard (Stats, Funnel, Recent apps)
+│   │   ├── admin/page.tsx     # Admin authentication login & session management
+│   │   ├── analytics/page.tsx # Analytics & visual insights
+│   │   ├── applications/      # Applications CRUD & detail views
+│   │   │   ├── page.tsx       # Applications list & search/filtering
+│   │   │   ├── new/page.tsx   # Add application form with AI extraction (Admin)
+│   │   │   └── [id]/          # Application detail
+│   │   │       ├── page.tsx   # Status, overview, notes, contact details
+│   │   │       ├── answers/   # AI Form Answer generator (Admin)
+│   │   │       └── interview/ # Tailored interview prep (Admin)
+│   │   ├── documents/page.tsx # Document manager & downloads
+│   │   └── api/               # Protected API routes
+│   │       ├── auth/          # Login, logout, and session check
+│   │       ├── applications/  # Application CRUD (Protected POST/PUT/DELETE)
+│   │       ├── ai/            # AI generation endpoints (Admin-only)
+│   │       └── interview/     # Interview question status (Admin-only)
 │   ├── components/
-│   │   └── Sidebar.tsx        # Navigation
+│   │   └── Sidebar.tsx        # Navigation sidebar with role-aware items
 │   ├── lib/
-│   │   ├── db.ts              # Prisma client (lazy proxy)
-│   │   ├── ai.ts              # OpenRouter + extraction
-│   │   └── utils.ts           # Helpers
-│   └── globals.css            # Design system tokens
+│   │   ├── admin.tsx          # Client-side admin auth context & useAdmin hook
+│   │   ├── admin-auth.ts      # Server-side token validation & timing-safe checks
+│   │   ├── db.ts              # Prisma client instance
+│   │   ├── ai.ts              # OpenRouter AI prompts & web scraper
+│   │   └── utils.ts           # Date formatting & UI helpers
+│   └── globals.css            # Custom CSS design system tokens
 ├── DESIGN.md                  # Full design specification
 └── PRODUCT.md                 # Product context
 ```
