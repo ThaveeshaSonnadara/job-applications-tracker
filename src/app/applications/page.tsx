@@ -5,12 +5,14 @@ import Link from 'next/link';
 import { Plus, Search, Clock, ExternalLink, Trash2 } from 'lucide-react';
 import { Application, STATUS_CONFIG, SOURCE_CONFIG, ApplicationStatus, ALL_STATUSES } from '@/types';
 import { formatDate, timeAgo } from '@/lib/utils';
+import { useAdmin } from '@/lib/admin';
 
 export default function ApplicationsPage() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>('ALL');
   const [search, setSearch] = useState('');
+  const { isAdmin } = useAdmin();
 
   const fetchApps = () => {
     const params = new URLSearchParams();
@@ -54,10 +56,12 @@ export default function ApplicationsPage() {
           <h1 className="page-title">Applications</h1>
           <p className="page-subtitle">{allApps.length} total applications</p>
         </div>
-        <Link href="/applications/new" className="btn btn-primary">
-          <Plus size={18} />
-          Add Application
-        </Link>
+        {isAdmin && (
+          <Link href="/applications/new" className="btn btn-primary">
+            <Plus size={18} />
+            Add Application
+          </Link>
+        )}
       </div>
 
       {/* Search */}
@@ -106,10 +110,7 @@ export default function ApplicationsPage() {
         <div className="empty-state">
           <div className="empty-state-icon">📋</div>
           <h3>{filter !== 'ALL' ? `No ${STATUS_CONFIG[filter as ApplicationStatus]?.label} applications` : 'No applications found'}</h3>
-          <p>{search ? 'Try a different search term.' : 'Start by adding your first application.'}</p>
-          <Link href="/applications/new" className="btn btn-primary">
-            <Plus size={18} /> Add Application
-          </Link>
+          <p>{search ? 'Try a different search term.' : 'No applications have been tracked yet.'}</p>
         </div>
       ) : (
         <div className="table-container">
@@ -122,7 +123,7 @@ export default function ApplicationsPage() {
                 <th>Status</th>
                 <th>Work Mode</th>
                 <th>Added</th>
-                <th style={{ width: '60px' }}></th>
+                {isAdmin && <th style={{ width: '60px' }}></th>}
               </tr>
             </thead>
             <tbody>
@@ -162,16 +163,18 @@ export default function ApplicationsPage() {
                       {timeAgo(app.createdAt)}
                     </span>
                   </td>
-                  <td>
-                    <button
-                      className="btn btn-ghost btn-icon"
-                      onClick={() => handleDelete(app.id, app.companyName)}
-                      title="Delete"
-                      style={{ color: 'var(--text-muted)' }}
-                    >
-                      <Trash2 size={15} />
-                    </button>
-                  </td>
+                  {isAdmin && (
+                    <td>
+                      <button
+                        className="btn btn-ghost btn-icon"
+                        onClick={() => handleDelete(app.id, app.companyName)}
+                        title="Delete"
+                        style={{ color: 'var(--text-muted)' }}
+                      >
+                        <Trash2 size={15} />
+                      </button>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>

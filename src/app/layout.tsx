@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Sidebar from '@/components/Sidebar';
+import { AdminProvider } from '@/lib/admin';
 
 export const metadata: Metadata = {
   title: 'JobTracker — Thaveesha\'s Job Application Tracker',
@@ -20,13 +21,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="app-layout">
-          <Sidebar />
-          <main className="main-content">
-            {children}
-          </main>
-        </div>
+        <AdminProvider>
+          <div className="app-layout">
+            <Sidebar />
+            <main className="main-content">
+              {children}
+            </main>
+          </div>
+        </AdminProvider>
       </body>
     </html>
   );
 }
+

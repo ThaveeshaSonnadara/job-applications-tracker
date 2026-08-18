@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
+import { requireAdmin } from '@/lib/admin-auth';
 
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const authError = requireAdmin(request);
+  if (authError) return authError;
+
   try {
     const { id } = await params;
     const body = await request.json();
@@ -27,6 +31,9 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const authError = requireAdmin(request);
+  if (authError) return authError;
+
   try {
     const { id } = await params;
     await prisma.interviewQuestion.delete({ where: { id } });
@@ -36,3 +43,4 @@ export async function DELETE(
     return NextResponse.json({ error: 'Failed to delete question' }, { status: 500 });
   }
 }
+

@@ -11,21 +11,25 @@ import {
   Sparkles,
   Menu,
   X,
+  Shield,
+  ShieldCheck,
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useAdmin } from '@/lib/admin';
 
 const navItems = [
-  { href: '/', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/applications', label: 'Applications', icon: Briefcase },
-  { href: '/applications/new', label: 'Add New', icon: PlusCircle },
-  { href: '/documents', label: 'Documents', icon: FileText },
-  { href: '/analytics', label: 'Analytics', icon: BarChart3 },
+  { href: '/', label: 'Dashboard', icon: LayoutDashboard, adminOnly: false },
+  { href: '/applications', label: 'Applications', icon: Briefcase, adminOnly: false },
+  { href: '/applications/new', label: 'Add New', icon: PlusCircle, adminOnly: true },
+  { href: '/documents', label: 'Documents', icon: FileText, adminOnly: false },
+  { href: '/analytics', label: 'Analytics', icon: BarChart3, adminOnly: false },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [appCount, setAppCount] = useState(0);
+  const { isAdmin } = useAdmin();
 
   useEffect(() => {
     fetch('/api/applications')
@@ -40,6 +44,8 @@ export default function Sidebar() {
     if (href === '/') return pathname === '/';
     return pathname.startsWith(href);
   };
+
+  const visibleNavItems = navItems.filter(item => !item.adminOnly || isAdmin);
 
   return (
     <>
@@ -68,7 +74,7 @@ export default function Sidebar() {
         </div>
 
         <div className="sidebar-nav">
-          {navItems.map((item) => (
+          {visibleNavItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -91,8 +97,18 @@ export default function Sidebar() {
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', marginTop: '4px' }}>
             🇱🇰 Colombo, Sri Lanka
           </div>
+          <Link
+            href="/admin"
+            className={`sidebar-link ${isActive('/admin') ? 'active' : ''}`}
+            onClick={() => setIsOpen(false)}
+            style={{ marginTop: 'var(--space-sm)', fontSize: '0.8rem', opacity: 0.6 }}
+          >
+            {isAdmin ? <ShieldCheck size={16} style={{ color: 'var(--accent-green)' }} /> : <Shield size={16} />}
+            <span>{isAdmin ? 'Admin ✓' : 'Admin'}</span>
+          </Link>
         </div>
       </nav>
     </>
   );
 }
+

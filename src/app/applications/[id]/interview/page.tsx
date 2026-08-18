@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
   ArrowLeft,
@@ -20,9 +20,12 @@ import {
   UserCheck,
 } from 'lucide-react';
 import { Application, InterviewQuestion } from '@/types';
+import { useAdmin } from '@/lib/admin';
 
 export default function InterviewPrepPage() {
   const params = useParams();
+  const router = useRouter();
+  const { isAdmin, loading: authLoading } = useAdmin();
   const [app, setApp] = useState<Application | null>(null);
   const [questions, setQuestions] = useState<InterviewQuestion[]>([]);
   const [loading, setLoading] = useState(true);
@@ -32,6 +35,12 @@ export default function InterviewPrepPage() {
   const [activeDifficulty, setActiveDifficulty] = useState<string>('ALL');
   const [expandedIds, setExpandedIds] = useState<Record<string, boolean>>({});
   const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!authLoading && !isAdmin) {
+      router.push(`/applications/${params.id}`);
+    }
+  }, [authLoading, isAdmin, params.id, router]);
 
   const fetchApp = () => {
     fetch(`/api/applications/${params.id}`)
@@ -53,8 +62,9 @@ export default function InterviewPrepPage() {
   };
 
   useEffect(() => {
+    if (authLoading || !isAdmin) return;
     fetchApp();
-  }, [params.id]);
+  }, [params.id, authLoading, isAdmin]);
 
   const handleGenerate = async () => {
     if (!app) return;
@@ -125,7 +135,7 @@ export default function InterviewPrepPage() {
     }
   };
 
-  if (loading) {
+  if (authLoading || !isAdmin || loading) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
         <div className="loading-spinner" style={{ width: 40, height: 40 }} />
