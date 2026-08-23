@@ -55,3 +55,18 @@ model InterviewQuestion {
 
   application Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
 }
+
+model Document {
+  id                String   @id @default(cuid())
+  title             String
+  filename          String   @unique
+  fileSize          String
+  fileType          String
+  category          String
+  description       String
+  usageGuidance     String
+  isMandatoryAlways Boolean  @default(false)
+  isOnlyOnDemand    Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}

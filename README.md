@@ -1,6 +1,6 @@
 # 🚀 Job Applications Tracker
 
-A polished full-stack job application tracker with AI-assisted form answering, tailored interview preparation, document management, and secure admin/public dual-mode view. Built for tracking Software Engineer, Associate SE, and Internship applications across Sri Lanka and globally.
+A polished full-stack job application tracker with AI-assisted form answering, tailored interview preparation, dynamic document management, and secure admin/public dual-mode view. Built for tracking Software Engineer, Associate SE, and Internship applications across Sri Lanka and globally.
 
 > **Live Demo:** [https://job-applications-tracker-gules.vercel.app](https://job-applications-tracker-gules.vercel.app) _(deploy your own below)_
 
@@ -15,10 +15,10 @@ A polished full-stack job application tracker with AI-assisted form answering, t
 | 🎯 **AI Form Answer Generator** (Admin)   | Personalized, human-sounding answers using your full profile, degree, internship & projects             |
 | 🧠 **Tailored Interview Prep** (Admin)    | Categorized questions (Technical, Behavioral, Company-Specific) with talking points & practice tracking |
 | ⚡ **AI Job URL Extraction** (Admin)      | Extract company name, role, requirements, and job description directly from job posting URLs            |
-| 📁 **Document Manager**                   | Previews & one-click downloads for CV, transcripts, certificates, results                               |
+| 📁 **Dynamic Document Manager**           | Database-backed document portfolio with public previews/downloads & admin-only Upload, Edit & Delete   |
 | 📈 **Analytics & Insights**               | Status distribution, channel success metrics, in-demand skills radar                                    |
 | 🛡️ **Server-Side Security & Redaction**  | Timing-safe auth tokens, API endpoint protection, and server-side redaction of confidential AI data      |
-| ☁️ **Cloud-Native PostgreSQL**            | Neon serverless DB — zero local setup, works on Vercel instantly                                        |
+| ☁️ **Cloud-Native PostgreSQL**            | Neon serverless DB with zero local setup, automated migrations, and instant Vercel integration          |
 
 ---
 
@@ -27,13 +27,15 @@ A polished full-stack job application tracker with AI-assisted form answering, t
 The application is designed to be shared publicly as an interactive career tracker and portfolio while keeping private application details secure:
 
 - **Public Visitors (Default):**
-  - View overall application statistics, analytics, and document downloads.
+  - View overall application statistics, conversion analytics, and portfolio documents.
+  - One-click document preview in new tab and direct download.
   - Browse applications with non-editable status indicators.
-  - Confidential AI answers, interview preparation, delete buttons, and creation forms are completely hidden and redacted from API responses.
+  - Confidential AI answers, interview preparation, delete buttons, and creation forms are completely hidden and redacted server-side from API responses.
 - **Admin Mode (Unlocked via `/admin`):**
   - Add, update, and delete applications.
   - Auto-extract job details from application URLs using AI.
   - Generate personalized form answers and custom interview preparation talking points.
+  - **Upload, edit, and delete documents** directly through the UI with drag-and-drop file upload, auto-title generation, and custom category pickers.
   - Fast status transitions with automatic timestamping.
 
 ---
@@ -105,7 +107,7 @@ Or manually:
    ```
 4. Deploy → Runs migration automatically
 
-### 4. Local Development
+### 4. Local Development & Sync
 
 ```bash
 git clone https://github.com/ThaveeshaSonnadara/job-applications-tracker.git
@@ -119,6 +121,8 @@ ADMIN_PASSWORD="your-local-admin-password"
 
 npm install
 npx prisma migrate dev --name init
+node prisma/seed-documents.js   # Seed default document portfolio into Dev DB
+node prisma/sync-prod.js        # (Optional) Sync documents to Production DB
 npm run dev
 ```
 
@@ -131,9 +135,13 @@ Open [http://localhost:3000](http://localhost:3000) and visit [http://localhost:
 ```
 app/
 ├── prisma/
-│   ├── schema.prisma          # Data models
-│   ├── migrations/            # SQL migrations
-│   └── config.js              # Prisma config
+│   ├── schema.prisma          # Data models (Application, Document, Answers, Questions)
+│   ├── migrations/            # SQL migrations history
+│   ├── seed-documents.js      # Document seed script for initial migration
+│   ├── sync-prod.js           # Production database document sync script
+│   └── config.js              # Prisma configuration & dynamic env loader
+├── public/
+│   └── documents/             # Uploaded PDF and image documents
 ├── src/
 │   ├── app/
 │   │   ├── page.tsx           # Dashboard (Stats, Funnel, Recent apps)
@@ -146,10 +154,11 @@ app/
 │   │   │       ├── page.tsx   # Status, overview, notes, contact details
 │   │   │       ├── answers/   # AI Form Answer generator (Admin)
 │   │   │       └── interview/ # Tailored interview prep (Admin)
-│   │   ├── documents/page.tsx # Document manager & downloads
+│   │   ├── documents/page.tsx # Document manager (Public view & Admin Upload/Edit/Delete)
 │   │   └── api/               # Protected API routes
 │   │       ├── auth/          # Login, logout, and session check
 │   │       ├── applications/  # Application CRUD (Protected POST/PUT/DELETE)
+│   │       ├── documents/     # Document listing & Upload/Edit/Delete (Admin-only mutations)
 │   │       ├── ai/            # AI generation endpoints (Admin-only)
 │   │       └── interview/     # Interview question status (Admin-only)
 │   ├── components/
@@ -160,28 +169,32 @@ app/
 │   │   ├── db.ts              # Prisma client instance
 │   │   ├── ai.ts              # OpenRouter AI prompts & web scraper
 │   │   └── utils.ts           # Date formatting & UI helpers
-│   └── globals.css            # Custom CSS design system tokens
+│   └── globals.css            # Custom CSS design system tokens & animations
 ├── DESIGN.md                  # Full design specification
 └── PRODUCT.md                 # Product context
 ```
 
 ---
 
-## 📝 Document Guidelines (Sri Lankan Applications)
+## 📝 Official Document Portfolio
 
-| Document                               | When to Submit                  |
-| -------------------------------------- | ------------------------------- |
-| **CV - Thaveesha Sonnadara [SE].pdf**  | Always attach                   |
-| **Degree Transcript Screenshot.png**   | Proof of degree requested       |
-| **Internship Confirmation Letter.pdf** | Proof of experience requested   |
-| **Birth Certificate Original.pdf**     | HR onboarding / ID verification |
-| **GCE A/L & O/L Results**              | Only when explicitly requested  |
+| Document                                                                                | Category     | When to Submit                                              |
+| --------------------------------------------------------------------------------------- | ------------ | ----------------------------------------------------------- |
+| **CV - Thaveesha Sonnadara [SE].pdf**                                                   | Core         | **Always attach** to every application & submission         |
+| **Thaveesha Sonnadara Internship confirmation letter.pdf**                              | Core         | When proof of past work experience / service letter needed  |
+| **University Degree Certificate — BEng (Hons) Software Engineering**                   | Academic     | Proof of degree graduation & certified qualification        |
+| **Official Degree Confirmation of Award Letter**                                        | Academic     | Verification of award conferral from university             |
+| **Official University Degree Academic Transcript**                                      | Academic     | When modular mark breakdowns, GPA, or transcripts needed    |
+| **Birth Certificate (Original)**                                                        | Identity     | HR onboarding, employment contract, or identity verification|
+| **G.C.E. Advanced Level Results Schedule**                                              | School Exam  | Only when explicitly requested by HR or application portal   |
+| **G.C.E. Ordinary Level Results Schedule**                                              | School Exam  | Only when explicitly requested by HR or application portal   |
 
 ---
 
 ## 🎨 Design System Highlights
 - **Brand Palette:** Deep Blue (`#0069A4`) → Vibrant Azure (`#1281C3`) with soft `#F5FBFF` canvas and `#EAF1F8` secondary surfaces
 - **Data-Forward Dashboard:** Clean white cards with crisp borders and subtle elevations
+- **Custom Category Pickers:** Interactive dropdowns with color-coded badges (`Briefcase` Core, `GraduationCap` Academic, `ShieldCheck` Identity, `Award` School Exam)
 - **Semantic Badges:** 8 status states with high-contrast labels and soft pill tints
 - **Typography:** DM Sans (700 headings, 600 labels, 400 body) + JetBrains Mono
 - **Motion:** Micro-interactions, smooth transitions, reduced-motion accessibility support
